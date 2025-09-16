@@ -3,6 +3,7 @@ import Dashboard from "../pages/Dashboard";
 import MainLayout from "../layout/MainLayout";
 import Register from "../pages/Register";
 import Login from "../pages/Login";
+import Donation from "../pages/Donation";
 
 export const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ export const router = createBrowserRouter([
       {
         index: true,
         element: <Dashboard />,
+      },
+      {
+        path: "/donation",
+        element: <Donation />,
       },
     ],
   },
