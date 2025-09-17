@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import TextForm from "../components/form/TextForm";
 import { useForm } from "react-hook-form";
 import PrimaryButton from "../components/button/PrimaryButton";
@@ -8,30 +8,31 @@ const Donation = () => {
     register,
     formState: { errors },
   } = useForm();
+  const data = [1000000, 2000000, 3000000, 4000000, 5000000, 6000000];
+  const [active, setActive] = useState(null);
+  const [nominal, setNominal] = useState(0);
+  const handleDonation = (index, value) => {
+    setActive(index);
+    setNominal(value);
+  };
   return (
     <div className="flex flex-col gap-5">
       <div className="">
         <h1 className="font-bold ">Pilih Jumlah Donasi</h1>
         <div className="">
           <div className="grid grid-cols-3 gap-4">
-            <div className="p-4 w-full  rounded-md shadow-md ">
-              <h1>Rp.1.000.000</h1>
-            </div>
-            <div className="p-4 w-full  rounded-md shadow-md ">
-              <h1>Rp.1.000.000</h1>
-            </div>
-            <div className="p-4 w-full  rounded-md shadow-md ">
-              <h1>Rp.1.000.000</h1>
-            </div>
-            <div className="p-4 w-full  rounded-md shadow-md ">
-              <h1>Rp.1.000.000</h1>
-            </div>
-            <div className="p-4 w-full  rounded-md shadow-md ">
-              <h1>Rp.1.000.000</h1>
-            </div>
-            <div className="p-4 w-full  rounded-md shadow-md ">
-              <h1>Rp.1.000.000</h1>
-            </div>
+            {data.map((item, index) => (
+              <button
+                key={index}
+                className={`p-4 w-full rounded-md shadow-md ${
+                  index == active ? "border-blue-500 border-2" : ""
+                }`}
+                type="button"
+                onClick={() => handleDonation(index, item)}
+              >
+                <h1>Rp.{item.toLocaleString("id-ID")}</h1>
+              </button>
+            ))}
           </div>
           <TextForm
             type={"text"}
@@ -39,6 +40,7 @@ const Donation = () => {
             label={"Nominal"}
             register={(name) => register(name, { required: "nominal" })}
             errors={errors}
+            value={nominal}
           />
         </div>
       </div>

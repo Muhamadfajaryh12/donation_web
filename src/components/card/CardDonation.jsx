@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const CardDonation = () => {
   return (
-    <Link to={"/donation"}>
+    <Link to={"/detail"}>
       <div className="rounded-xl shadow-md " id="card-donation">
         <div className="" id="card-header">
           <img
