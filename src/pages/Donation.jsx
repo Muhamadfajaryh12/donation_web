@@ -7,20 +7,29 @@ const Donation = () => {
   const {
     register,
     formState: { errors },
+    setValue,
   } = useForm();
   const data = [1000000, 2000000, 3000000, 4000000, 5000000, 6000000];
   const [active, setActive] = useState(null);
-  const [nominal, setNominal] = useState(0);
+
   const handleDonation = (index, value) => {
     setActive(index);
-    setNominal(value);
+    setValue("nominal", value);
+  };
+
+  const handleAnonym = (checked) => {
+    if (checked) {
+      setValue("nama_pengirim", "annonymus");
+    } else {
+      setValue("nama_pengirim", "");
+    }
   };
   return (
     <div className="flex flex-col gap-5">
       <div className="">
         <h1 className="font-bold ">Pilih Jumlah Donasi</h1>
         <div className="">
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-3 gap-4 mb-4">
             {data.map((item, index) => (
               <button
                 key={index}
@@ -40,16 +49,30 @@ const Donation = () => {
             label={"Nominal"}
             register={(name) => register(name, { required: "nominal" })}
             errors={errors}
-            value={nominal}
           />
         </div>
       </div>
       <div className="">
-        <h1 className="font-bold">Berikan Pesan dan Doa</h1>
+        <TextForm
+          type={"text"}
+          name="nama_pengirim"
+          label={"Nama Pengirim"}
+          register={(name) => register(name, { required: false })}
+          errors={errors}
+        />
+        <div className="flex items-center gap-2 mt-1">
+          <input
+            type="checkbox"
+            onChange={(e) => handleAnonym(e.target.checked)}
+          />
+          <span className="text-sm">Kirim sebagai anonymus</span>
+        </div>
+      </div>
+      <div className="">
         <TextForm
           type={"text"}
           name={"asd"}
-          label={"Pesan dan Doa"}
+          label={"Tuliskan pesan dan harapan"}
           register={(name) => register(name, { required: "asd" })}
           errors={errors}
         />

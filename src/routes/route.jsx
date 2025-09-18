@@ -5,6 +5,7 @@ import Register from "../pages/Register";
 import Login from "../pages/Login";
 import Donation from "../pages/Donation";
 import DetailDonation from "../pages/DetailDonation";
+import DetailLayout from "../layout/DetailLayout";
 
 export const router = createBrowserRouter([
   {
@@ -27,8 +28,14 @@ export const router = createBrowserRouter([
         path: "/donation",
         element: <Donation />,
       },
+    ],
+  },
+  {
+    path: "/detail",
+    element: <DetailLayout />,
+    children: [
       {
-        path: "/detail",
+        index: true,
         element: <DetailDonation />,
       },
     ],
