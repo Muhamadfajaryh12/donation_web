@@ -2,6 +2,7 @@ import React from "react";
 import TextForm from "../components/form/TextForm";
 import { useForm } from "react-hook-form";
 import PrimaryButton from "../components/button/PrimaryButton";
+import { Link } from "react-router-dom";
 
 const Register = () => {
   const {
@@ -14,11 +15,15 @@ const Register = () => {
   };
   return (
     <div>
-      <h1 className="text-3xl font-extrabold ">Daftar Akun</h1>
-      <div className="w-full h-1 my-3 bg-black"></div>
+      <h1 className=" text-center font-extrabold text-blue-600 text-4xl">
+        Daftar Akun
+      </h1>
+      <p className="text-center my-5 text-sm text-gray-500">
+        Mendaftarkan Akun Anda
+      </p>
       <form
         onSubmit={handleSubmit(submit)}
-        className="w-xl flex flex-col gap-2"
+        className="w-lg flex flex-col gap-2"
       >
         <TextForm
           type={"email"}
@@ -47,6 +52,12 @@ const Register = () => {
         />
         <PrimaryButton title={"Daftar"} type={"submit"} />
       </form>
+      <p className="text-center text-sm mt-4">
+        Sudah punya Akun?{" "}
+        <Link to="/login" className="font-semibold text-blue-600">
+          Masuk
+        </Link>
+      </p>
     </div>
   );
 };
