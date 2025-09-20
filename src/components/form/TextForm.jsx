@@ -3,7 +3,7 @@ import React from "react";
 const TextForm = ({ name, label, type, register, errors, ...props }) => {
   return (
     <div className="w-full">
-      <label htmlFor={name} className="font-medium block mb-1">
+      <label htmlFor={name} className="font-medium block mb-1 text-sm">
         {label}
       </label>
       <input

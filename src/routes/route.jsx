@@ -7,7 +7,9 @@ import Donation from "../pages/Donation";
 import DetailDonation from "../pages/DetailDonation";
 import DetailLayout from "../layout/DetailLayout";
 import YayasanDashboard from "../pages/Yayasan/YayasanDashboard";
-import CreateDonation from "../pages/Yayasan/CreateDonation";
+import CreateCampaign from "../pages/Yayasan/CreateCampagin";
+import YayasanLayout from "../layout/YayasanLayout";
+import YayasanCampaign from "../pages/Yayasan/YayasanCampaign";
 
 export const router = createBrowserRouter([
   {
@@ -44,15 +46,19 @@ export const router = createBrowserRouter([
   },
   {
     path: "/yayasan",
-    element: <MainLayout />,
+    element: <YayasanLayout />,
     children: [
       {
         index: true,
         element: <YayasanDashboard />,
       },
       {
-        path: "donation/form",
-        element: <CreateDonation />,
+        path: "campaign",
+        element: <YayasanCampaign />,
+      },
+      {
+        path: "campaign/form",
+        element: <CreateCampaign />,
       },
     ],
   },
