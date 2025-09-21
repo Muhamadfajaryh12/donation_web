@@ -32,7 +32,15 @@ const CreateCampaign = () => {
 
   return (
     <div>
-      <form action="" className="w-xl flex flex-col gap-4">
+      <div className="mb-4">
+        <h1 className="font-extrabold text-2xl text-blue-800 ">
+          Formulir Pembuatan Kampanye
+        </h1>
+        <p className="text-sm text-gray-500 font-semibold">
+          Silahkan mengisi formulir pembuatan Kampanye dengan benar !
+        </p>
+      </div>
+      <form action="" className="w-4xl flex flex-col gap-4">
         <TextForm
           type={"text"}
           name="title"
@@ -53,6 +61,7 @@ const CreateCampaign = () => {
           data={data}
           labelField={"title"}
           valueField={"id"}
+          placeholder={"Pilih kategori"}
         />
         <TextForm
           type={"text"}

@@ -1,6 +1,13 @@
 import React from "react";
 
-const SelectForm = ({ label, data, labelField, valueField, name }) => {
+const SelectForm = ({
+  label,
+  data,
+  labelField,
+  valueField,
+  name,
+  placeholder,
+}) => {
   return (
     <div>
       <label htmlFor={name} className="font-medium block mb-1 text-sm">
@@ -11,6 +18,7 @@ const SelectForm = ({ label, data, labelField, valueField, name }) => {
         id=""
         className="block border w-full p-2 border-gray-300 rounded-md focus:outline-blue-500"
       >
+        <option value="">{placeholder}</option>
         {data.map((item) => (
           <option value={item[valueField]}>{item[labelField]}</option>
         ))}
