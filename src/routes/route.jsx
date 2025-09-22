@@ -10,6 +10,8 @@ import YayasanDashboard from "../pages/Yayasan/YayasanDashboard";
 import CreateCampaign from "../pages/Yayasan/CreateCampagin";
 import YayasanLayout from "../layout/YayasanLayout";
 import YayasanCampaign from "../pages/Yayasan/YayasanCampaign";
+import Profile from "../pages/Donatur/Profile";
+import HistoryDonatur from "../pages/Donatur/HistoryDonatur";
 
 export const router = createBrowserRouter([
   {
@@ -31,6 +33,14 @@ export const router = createBrowserRouter([
       {
         path: "/donation",
         element: <Donation />,
+      },
+      {
+        path: "/profile",
+        element: <Profile />,
+      },
+      {
+        path: "/history",
+        element: <HistoryDonatur />,
       },
     ],
   },
