@@ -3,6 +3,7 @@ import TextForm from "../components/form/TextForm";
 import { useForm } from "react-hook-form";
 import PrimaryButton from "../components/button/PrimaryButton";
 import { Link } from "react-router-dom";
+import AuthAPI from "../shared/AuthAPI";
 
 const Register = () => {
   const {
@@ -10,8 +11,15 @@ const Register = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const submit = () => {
-    console.log(errors);
+  const submit = async (data) => {
+    const response = await AuthAPI.register({
+      email: data.email,
+      password: data.password,
+      name: data.nama_lengkap,
+      role: "donatur",
+    });
+
+    console.log(response);
   };
   return (
     <div>

@@ -3,12 +3,21 @@ import { useForm } from "react-hook-form";
 import TextForm from "../components/form/TextForm";
 import PrimaryButton from "../components/button/PrimaryButton";
 import { Link } from "react-router-dom";
+import AuthAPI from "../shared/AuthAPI";
 
 const Login = () => {
   const {
     register,
     formState: { errors },
+    handleSubmit,
   } = useForm();
+  const submit = async (data) => {
+    const response = await AuthAPI.login({
+      email: data.email,
+      password: data.password,
+    });
+    console.log(response);
+  };
   return (
     <div>
       <h1 className=" text-center font-extrabold text-blue-600 text-4xl">
@@ -17,7 +26,10 @@ const Login = () => {
       <p className="text-center my-5 text-sm text-gray-500">
         Masuk Kedalam Akun Anda
       </p>
-      <form className="flex flex-col gap-4 w-lg">
+      <form
+        className="flex flex-col gap-4 w-lg"
+        onSubmit={handleSubmit(submit)}
+      >
         <TextForm
           type={"email"}
           name={"email"}
@@ -32,7 +44,7 @@ const Login = () => {
           register={(name) => register(name, { required: "password required" })}
           errors={errors}
         />
-        <PrimaryButton title={"Masuk"} />
+        <PrimaryButton title={"Masuk"} type={"submit"} />
       </form>
       <p className="text-sm mt-4 text-center">
         Belum Punya Akun?{" "}
