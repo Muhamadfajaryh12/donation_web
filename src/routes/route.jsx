@@ -12,6 +12,7 @@ import YayasanLayout from "../layout/YayasanLayout";
 import YayasanCampaign from "../pages/Yayasan/YayasanCampaign";
 import Profile from "../pages/Donatur/Profile";
 import HistoryDonatur from "../pages/Donatur/HistoryDonatur";
+import PrivateLayout from "../layout/PrivateLayout";
 
 export const router = createBrowserRouter([
   {
@@ -32,7 +33,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/donation",
-        element: <Donation />,
+        element: (
+          <PrivateLayout>
+            <Donation />
+          </PrivateLayout>
+        ),
       },
       {
         path: "/profile",
@@ -56,7 +61,11 @@ export const router = createBrowserRouter([
   },
   {
     path: "/yayasan",
-    element: <YayasanLayout />,
+    element: (
+      <PrivateLayout>
+        <YayasanLayout />
+      </PrivateLayout>
+    ),
     children: [
       {
         index: true,

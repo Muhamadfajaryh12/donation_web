@@ -2,10 +2,13 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import TextForm from "../components/form/TextForm";
 import PrimaryButton from "../components/button/PrimaryButton";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AuthAPI from "../shared/AuthAPI";
+import { useAuth } from "../context/AuthProvider";
 
 const Login = () => {
+  const { login } = useAuth();
+  const navigation = useNavigate();
   const {
     register,
     formState: { errors },
@@ -16,7 +19,10 @@ const Login = () => {
       email: data.email,
       password: data.password,
     });
-    console.log(response);
+    if (response.status == 200) {
+      login(response.data.token);
+      navigation("/");
+    }
   };
   return (
     <div>
