@@ -16,7 +16,7 @@ const Register = () => {
       email: data.email,
       password: data.password,
       name: data.nama_lengkap,
-      role: "donatur",
+      role: "yayasan",
     });
 
     console.log(response);

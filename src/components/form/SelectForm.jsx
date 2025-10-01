@@ -7,6 +7,8 @@ const SelectForm = ({
   valueField,
   name,
   placeholder,
+  register,
+  errors,
 }) => {
   return (
     <div>
@@ -17,6 +19,7 @@ const SelectForm = ({
         name={name}
         id=""
         className="block border w-full p-2 border-gray-300 rounded-md focus:outline-blue-500"
+        {...register(name)}
       >
         <option value="">{placeholder}</option>
         {data.map((item) => (

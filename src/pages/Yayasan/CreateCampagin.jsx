@@ -1,35 +1,56 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import TextForm from "../../components/form/TextForm";
 import SelectForm from "../../components/form/SelectForm";
 import PrimaryButton from "../../components/button/PrimaryButton";
 import FileUpload from "../../components/form/FileUpload";
 import DangerButton from "../../components/button/DangerButton";
+import CategoryAPI from "../../shared/CategoryAPI";
+import campaignAPI from "../../shared/CampaignAPI";
+import { useAuth } from "../../context/AuthProvider";
 
-const data = [
-  {
-    id: 1,
-    title: "Sosial",
-  },
-  {
-    id: 2,
-    title: "Pendidikan",
-  },
-];
 const CreateCampaign = () => {
+  const { user } = useAuth();
+
   const {
     register,
     formState: { errors },
+    handleSubmit,
   } = useForm();
 
+  const [file, setFile] = useState(null);
   const [image, setImage] = useState(null);
+  const [category, setCategory] = useState([]);
+  const categoryData = async () => {
+    const response = await CategoryAPI.getCategory();
+    setCategory(response.data);
+  };
 
-  const handleImage = (file) => {
-    if (file) {
-      setImage(URL.createObjectURL(file));
+  useEffect(() => {
+    categoryData();
+  }, []);
+
+  const handleImage = (img) => {
+    if (img) {
+      setImage(URL.createObjectURL(img));
+      setFile(img);
     }
   };
 
+  const submit = async (data) => {
+    const formData = new FormData();
+    formData.append("title", data.title);
+    formData.append("location", data.location);
+    formData.append("description", data.description);
+    formData.append("amount", data.amount);
+    formData.append("expired_date", data.expired_date);
+    formData.append("category_id", data.category);
+    formData.append("user_id", user.id);
+    formData.append("image", file);
+
+    const response = await campaignAPI.createCampaign(formData);
+    console.log(response);
+  };
   return (
     <div>
       <div className="mb-4">
@@ -40,11 +61,22 @@ const CreateCampaign = () => {
           Silahkan mengisi formulir pembuatan Kampanye dengan benar !
         </p>
       </div>
-      <form action="" className="w-4xl flex flex-col gap-4">
+      <form
+        action=""
+        className="w-4xl flex flex-col gap-4"
+        onSubmit={handleSubmit(submit)}
+      >
         <TextForm
           type={"text"}
           name="title"
           label={"Judul Kampanye"}
+          register={(name) => register(name, { required: "" })}
+          errors={errors}
+        />
+        <TextForm
+          type={"text"}
+          name="location"
+          label={"Lokasi"}
           register={(name) => register(name, { required: "" })}
           errors={errors}
         />
@@ -58,35 +90,27 @@ const CreateCampaign = () => {
         <SelectForm
           name={"category"}
           label={"Kategori"}
-          data={data}
-          labelField={"title"}
+          data={category}
+          labelField={"category"}
           valueField={"id"}
           placeholder={"Pilih kategori"}
+          register={(name) => register(name, { required: "" })}
+          errors={errors}
         />
         <TextForm
           type={"text"}
-          name="target_amount"
+          name="amount"
           label={"Target Dana"}
           register={(name) => register(name, { required: "" })}
           errors={errors}
         />
-        <div className="grid grid-cols-2 gap-2">
-          <TextForm
-            type={"date"}
-            name="start_date"
-            label={"Tanggal Mulai"}
-            register={(name) => register(name, { required: "" })}
-            errors={errors}
-          />{" "}
-          <TextForm
-            type={"date"}
-            name="end_date"
-            label={"Tanggal Berakhir"}
-            register={(name) => register(name, { required: "" })}
-            errors={errors}
-          />
-        </div>
-
+        <TextForm
+          type={"date"}
+          name="expired_date"
+          label={"Tanggal Berakhir"}
+          register={(name) => register(name, { required: "" })}
+          errors={errors}
+        />
         {!image ? (
           <FileUpload handleImage={handleImage} />
         ) : (
@@ -98,7 +122,9 @@ const CreateCampaign = () => {
               <button
                 className="w-8 h-8 rounded-full text-white bg-red-500  absolute -right-3 -top-3 hover:bg-red-600 "
                 type="button"
-                onClick={() => setImage(null)}
+                onClick={() => {
+                  setImage(null), setFile(null);
+                }}
               >
                 X
               </button>
@@ -109,7 +135,7 @@ const CreateCampaign = () => {
             </div>
           </div>
         )}
-        <PrimaryButton title={"Buat Kampanye"} />
+        <PrimaryButton title={"Buat Kampanye"} type={"submit"} />
       </form>
     </div>
   );
