@@ -18,7 +18,26 @@ const campaignAPI = (() => {
       console.log(error);
     }
   };
-  return { createCampaign };
+
+  const getCampaign = async () => {
+    try {
+      const response = await axios.get(BASE_URL);
+      console.log(response);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getCampaignByYayasan = async (id) => {
+    try {
+      const response = await axios.get(`${BASE_URL}/yayasan/${id}`);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  return { createCampaign, getCampaign, getCampaignByYayasan };
 })();
 
 export default campaignAPI;
