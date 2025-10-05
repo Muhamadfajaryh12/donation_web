@@ -13,7 +13,7 @@ const AuthAPI = (() => {
       });
       return response;
     } catch (error) {
-      console.log(error);
+      return error.response.data;
     }
   };
 
@@ -25,7 +25,7 @@ const AuthAPI = (() => {
       });
       return response.data;
     } catch (error) {
-      console.log(error);
+      return error.response.data;
     }
   };
   return {

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const CardDonation = ({ data }) => {
   return (
-    <Link to={"/detail"}>
+    <Link to={`/detail/${data.id}`}>
       <div className="rounded-xl shadow-md " id="card-donation">
         <div className="relative" id="card-header">
           <img src={data.image} alt="" className="rounded-t-lg w-full h-48" />

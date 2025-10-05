@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import TextForm from "../components/form/TextForm";
 import { useForm } from "react-hook-form";
 import PrimaryButton from "../components/button/PrimaryButton";
 import { Link } from "react-router-dom";
 import AuthAPI from "../shared/AuthAPI";
+import MessageAlert from "../components/alert/MessageAlert";
 
 const Register = () => {
+  const [alert, setAlert] = useState(null);
   const {
     register,
     formState: { errors },
@@ -18,7 +20,9 @@ const Register = () => {
       name: data.nama_lengkap,
       role: "yayasan",
     });
-
+    if (response) {
+      setAlert(response);
+    }
     console.log(response);
   };
   return (
@@ -33,6 +37,7 @@ const Register = () => {
         onSubmit={handleSubmit(submit)}
         className="w-lg flex flex-col gap-2"
       >
+        {alert && <MessageAlert data={alert} />}
         <TextForm
           type={"email"}
           label={"Email"}
