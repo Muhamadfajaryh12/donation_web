@@ -1,5 +1,5 @@
 import React from "react";
-import { FaClock, FaTimes } from "react-icons/fa";
+import { FaClock, FaTimes, FaTrash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const CardDonation = ({ data }) => {

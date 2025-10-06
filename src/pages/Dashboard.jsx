@@ -14,6 +14,7 @@ const Dashboard = () => {
   useEffect(() => {
     dataCampaign();
   }, []);
+
   return (
     <div className="w-full">
       <div className="my-4">

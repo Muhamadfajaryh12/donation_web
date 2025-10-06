@@ -37,7 +37,32 @@ const campaignAPI = (() => {
       console.log(error);
     }
   };
-  return { createCampaign, getCampaign, getCampaignByYayasan };
+
+  const getCampaignByCategory = async (id) => {
+    try {
+      const response = await axios.get(`${BASE_URL}?category_id=${id}`);
+      console.log(response);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const getCampaignBySearch = async (keyword) => {
+    try {
+      const response = await axios.get(`${BASE_URL}?search=${keyword}`);
+      console.log(keyword);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  return {
+    createCampaign,
+    getCampaign,
+    getCampaignByYayasan,
+    getCampaignByCategory,
+    getCampaignBySearch,
+  };
 })();
 
 export default campaignAPI;

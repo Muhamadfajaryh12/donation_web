@@ -13,6 +13,7 @@ import YayasanCampaign from "../pages/Yayasan/YayasanCampaign";
 import Profile from "../pages/Donatur/Profile";
 import HistoryDonatur from "../pages/Donatur/HistoryDonatur";
 import PrivateLayout from "../layout/PrivateLayout";
+import CampaignSearch from "../pages/CampaignSearch";
 
 export const router = createBrowserRouter([
   {
@@ -46,6 +47,14 @@ export const router = createBrowserRouter([
       {
         path: "/history",
         element: <HistoryDonatur />,
+      },
+      {
+        path: "/campaign/category",
+        element: <CampaignSearch mode={"category"} />,
+      },
+      {
+        path: "/campaign/search",
+        element: <CampaignSearch mode={"search"} />,
       },
     ],
   },
