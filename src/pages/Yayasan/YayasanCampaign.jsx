@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import CardDonation from "../../components/card/CardDonation";
 import { useAuth } from "../../context/AuthProvider";
 import campaignAPI from "../../shared/CampaignAPI";
+import BreadCrumb from "../../components/navigation/BreadCrumb";
 
 const YayasanCampaign = () => {
   const [data, setData] = useState([]);
@@ -26,6 +27,7 @@ const YayasanCampaign = () => {
 
   return (
     <div className="">
+      <BreadCrumb data={["Yayasan", "Campaign"]} />
       <div className="grid grid-cols-3 gap-4">
         {dataPagination.map((item) => (
           <CardDonation data={item} key={item.id} />

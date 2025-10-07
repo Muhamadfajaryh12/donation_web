@@ -6,7 +6,8 @@ import CategoryAPI from "../../shared/CategoryAPI";
 import SearchBar from "./SearchBar";
 
 const Navbar = () => {
-  const { token, logout } = useAuth();
+  const { token, logout, user } = useAuth();
+
   const [dataCategory, setDataCategory] = useState([]);
   const navigation = useNavigate();
   const getDataCategory = async () => {
@@ -17,20 +18,36 @@ const Navbar = () => {
   useEffect(() => {
     getDataCategory();
   }, []);
+
+  const dataDropdownCategory = dataCategory.map((item) => ({
+    link: <Link to={`/campaign/category?id=${item.id}`}>{item.category}</Link>,
+  }));
+
+  const dataDropdownUser = [
+    {
+      link: <Link to={`/profile`}>Profile</Link>,
+    },
+    {
+      link: <Link to={`/history`}>Riwayat</Link>,
+    },
+  ];
   return (
     <div className="flex w-full p-2 border-b border-gray-300 justify-between items-center">
       <h1>Donation</h1>
-      <Dropdown title={"Kategori"} data={dataCategory} />
+      <Dropdown title={"Kategori"} data={dataDropdownCategory} />
       <SearchBar />
       {token ? (
-        <button
-          className="p-2 rounded-full border-blue-400 border text-xs text-blue-400 font-semibold w-18 text-center"
-          onClick={() => {
-            logout(), navigation("/login");
-          }}
-        >
-          Logout
-        </button>
+        <>
+          <Dropdown title={user?.name} data={dataDropdownUser} />
+          <button
+            className="p-2 rounded-full border-blue-400 border text-xs text-blue-400 font-semibold w-18 text-center"
+            onClick={() => {
+              logout(), navigation("/login");
+            }}
+          >
+            Logout
+          </button>
+        </>
       ) : (
         <div className="flex justify-center gap-2">
           <Link

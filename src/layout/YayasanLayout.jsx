@@ -1,12 +1,13 @@
 import React from "react";
 import Sidebar from "../components/navigation/Sidebar";
 import { Outlet } from "react-router-dom";
+import BreadCrumb from "../components/navigation/BreadCrumb";
 
 const YayasanLayout = () => {
   return (
-    <div className="w-screen h-screen flex">
+    <div className=" min-h-screen flex gap-2">
       <Sidebar />
-      <div className="w-full flex justify-center items-center ">
+      <div className="m-5 w-full">
         <Outlet />
       </div>
     </div>

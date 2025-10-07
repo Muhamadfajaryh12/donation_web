@@ -24,7 +24,11 @@ const Login = () => {
     console.log(response);
     if (response?.status == 200) {
       login(response.data.token);
-      navigation("/");
+      if (response.data.role == "yayasan") {
+        navigation("/yayasan");
+      } else {
+        navigation("/");
+      }
     } else {
       setAlert(response);
     }

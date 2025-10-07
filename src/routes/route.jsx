@@ -59,7 +59,7 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    path: "/detail/:id",
+    path: "/campaign/:id",
     element: <DetailLayout />,
     children: [
       {

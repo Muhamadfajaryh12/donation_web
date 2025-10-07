@@ -13,11 +13,7 @@ const Dropdown = ({ title, data }) => {
       >
         <ul>
           {data.map((item) => (
-            <li className="my-2 hover:bg-gray-100 p-2">
-              <Link to={`/campaign/category?id=${item.id}`}>
-                {item.category}
-              </Link>
-            </li>
+            <li className="my-2 hover:bg-gray-100 p-2">{item.link}</li>
           ))}
         </ul>
       </div>

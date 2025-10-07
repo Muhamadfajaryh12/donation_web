@@ -9,8 +9,15 @@ import {
 } from "react-icons/fa";
 import { GrFormUp } from "react-icons/gr";
 import { Link, useLocation } from "react-router-dom";
+import { useAuth } from "../../context/AuthProvider";
+import { FaDiagramProject } from "react-icons/fa6";
 
 const dataLink = [
+  {
+    link: "/yayasan",
+    title: "Dashboard",
+    icon: <FaDiagramProject />,
+  },
   {
     link: "/yayasan/campaign",
     title: "Kampanye",
@@ -27,10 +34,11 @@ const Sidebar = () => {
   const path = useLocation();
   const pathname = path.pathname;
   const [open, setOpen] = useState(true);
+  const { logout } = useAuth();
   return (
     <div
-      className={` h-full border-r border-gray-300 p-4 ease-in duration-300 ${
-        open ? "w-96" : "w-18"
+      className={` min-h-screen max-h-auto border-r border-gray-300 p-4 ease-in duration-300 ${
+        open ? "w-72" : "w-18"
       }`}
     >
       <div className={`flex ${open ? "justify-end" : "justify-center"}`}>
@@ -74,7 +82,7 @@ const Sidebar = () => {
         </ul>
       </div>
       <div className="">
-        <button className="flex gap-4 items-center p-2">
+        <button className="flex gap-4 items-center p-2" onClick={logout}>
           <BiLogOut /> {open && <p>Keluar</p>}
         </button>
       </div>
