@@ -9,16 +9,18 @@ import CategoryAPI from "../../shared/CategoryAPI";
 import campaignAPI from "../../shared/CampaignAPI";
 import { useAuth } from "../../context/AuthProvider";
 import BreadCrumb from "../../components/navigation/BreadCrumb";
+import MessageAlert from "../../components/alert/MessageAlert";
 
 const CreateCampaign = () => {
   const { user } = useAuth();
-
   const {
     register,
     formState: { errors },
     handleSubmit,
+    reset,
   } = useForm();
 
+  const [alert, setAlert] = useState(null);
   const [file, setFile] = useState(null);
   const [image, setImage] = useState(null);
   const [category, setCategory] = useState([]);
@@ -50,7 +52,12 @@ const CreateCampaign = () => {
     formData.append("image", file);
 
     const response = await campaignAPI.createCampaign(formData);
-    console.log(response);
+    if (response.status == 201) {
+      setAlert(response);
+      reset();
+      setFile(null);
+      setImage(null);
+    }
   };
   return (
     <div>
@@ -63,6 +70,7 @@ const CreateCampaign = () => {
           Silahkan mengisi formulir pembuatan Kampanye dengan benar !
         </p>
       </div>
+      {alert && <MessageAlert data={alert} />}
       <form
         action=""
         className="w-4xl flex flex-col gap-4"
