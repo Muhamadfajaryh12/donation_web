@@ -26,6 +26,9 @@ const SelectForm = ({
           <option value={item[valueField]}>{item[labelField]}</option>
         ))}
       </select>
+      {errors[name] && (
+        <p className="text-red-600 text-xs">{errors[name].message}</p>
+      )}
     </div>
   );
 };

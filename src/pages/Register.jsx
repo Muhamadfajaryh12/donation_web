@@ -10,7 +10,7 @@ const Register = () => {
   const [alert, setAlert] = useState(null);
   const {
     register,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     handleSubmit,
   } = useForm();
   const submit = async (data) => {
@@ -63,7 +63,11 @@ const Register = () => {
           }
           errors={errors}
         />
-        <PrimaryButton title={"Daftar"} type={"submit"} />
+        <PrimaryButton
+          title={"Daftar"}
+          type={"submit"}
+          disabled={isSubmitting}
+        />
       </form>
       <p className="text-center text-sm mt-4">
         Sudah punya Akun?{" "}

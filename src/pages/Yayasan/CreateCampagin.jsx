@@ -15,7 +15,7 @@ const CreateCampaign = () => {
   const { user } = useAuth();
   const {
     register,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     handleSubmit,
     reset,
   } = useForm();
@@ -80,21 +80,27 @@ const CreateCampaign = () => {
           type={"text"}
           name="title"
           label={"Judul Kampanye"}
-          register={(name) => register(name, { required: "" })}
+          register={(name) =>
+            register(name, { required: "Judul wajib diisi!" })
+          }
           errors={errors}
         />
         <TextForm
           type={"text"}
           name="location"
           label={"Lokasi"}
-          register={(name) => register(name, { required: "" })}
+          register={(name) =>
+            register(name, { required: "Lokasi wajib diisi!" })
+          }
           errors={errors}
         />
         <TextForm
           type={"text"}
           name="description"
           label={"Deskripsi"}
-          register={(name) => register(name, { required: "" })}
+          register={(name) =>
+            register(name, { required: "Deskripsi wajib diisi!" })
+          }
           errors={errors}
         />
         <SelectForm
@@ -104,21 +110,27 @@ const CreateCampaign = () => {
           labelField={"category"}
           valueField={"id"}
           placeholder={"Pilih kategori"}
-          register={(name) => register(name, { required: "" })}
+          register={(name) =>
+            register(name, { required: "Kategori wajib diisi!" })
+          }
           errors={errors}
         />
         <TextForm
           type={"text"}
           name="amount"
           label={"Target Dana"}
-          register={(name) => register(name, { required: "" })}
+          register={(name) =>
+            register(name, { required: "Target dana wajib diisi!" })
+          }
           errors={errors}
         />
         <TextForm
           type={"date"}
           name="expired_date"
           label={"Tanggal Berakhir"}
-          register={(name) => register(name, { required: "" })}
+          register={(name) =>
+            register(name, { required: "Tanggal berakhir wajib diisi!" })
+          }
           errors={errors}
         />
         {!image ? (
@@ -145,7 +157,11 @@ const CreateCampaign = () => {
             </div>
           </div>
         )}
-        <PrimaryButton title={"Buat Kampanye"} type={"submit"} />
+        <PrimaryButton
+          title={"Buat Kampanye"}
+          type={"submit"}
+          disabled={isSubmitting}
+        />
       </form>
     </div>
   );

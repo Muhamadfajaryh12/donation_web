@@ -23,16 +23,18 @@ const YayasanDashboard = () => {
       <div className="grid grid-cols-3 gap-4">
         <div className="border border-gray-300 w-full h-32 rounded-md p-4">
           <h1 className="tracking-wider font-semibold">Campaign</h1>
-          <p className="font-bold text-4xl my-4 ">{data.total_campaign}</p>
+          <p className="font-bold text-4xl my-4 ">{data?.total_campaign}</p>
         </div>
         <div className="border border-gray-300 w-full h-32 rounded-md p-4">
           <h1 className="tracking-wider font-semibold">Dibuka</h1>
-          <p className="font-bold text-4xl my-4 ">{data.total_campaign_open}</p>
+          <p className="font-bold text-4xl my-4 ">
+            {data?.total_campaign_open}
+          </p>
         </div>
         <div className="border border-gray-300 w-full h-32 rounded-md p-4">
           <h1 className="tracking-wider font-semibold">Selesai</h1>{" "}
           <p className="font-bold text-4xl my-4 ">
-            {data.total_campaign_close}
+            {data?.total_campaign_close}
           </p>
         </div>
       </div>

@@ -13,7 +13,7 @@ const Login = () => {
   const navigation = useNavigate();
   const {
     register,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     handleSubmit,
   } = useForm();
   const submit = async (data) => {
@@ -22,6 +22,7 @@ const Login = () => {
       password: data.password,
     });
     console.log(response);
+    console.log(isSubmitting);
     if (response?.status == 200) {
       login(response.data.token);
       if (response.data.role == "yayasan") {
@@ -61,7 +62,11 @@ const Login = () => {
           register={(name) => register(name, { required: "password required" })}
           errors={errors}
         />
-        <PrimaryButton title={"Masuk"} type={"submit"} />
+        <PrimaryButton
+          title={"Masuk"}
+          type={"submit"}
+          disabled={isSubmitting}
+        />
       </form>
       <p className="text-sm mt-4 text-center">
         Belum Punya Akun?{" "}
