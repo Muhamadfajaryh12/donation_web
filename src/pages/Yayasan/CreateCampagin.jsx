@@ -4,21 +4,34 @@ import TextForm from "../../components/form/TextForm";
 import SelectForm from "../../components/form/SelectForm";
 import PrimaryButton from "../../components/button/PrimaryButton";
 import FileUpload from "../../components/form/FileUpload";
-import DangerButton from "../../components/button/DangerButton";
 import CategoryAPI from "../../shared/CategoryAPI";
 import campaignAPI from "../../shared/CampaignAPI";
 import { useAuth } from "../../context/AuthProvider";
 import BreadCrumb from "../../components/navigation/BreadCrumb";
 import MessageAlert from "../../components/alert/MessageAlert";
+import { useParams } from "react-router-dom";
 
 const CreateCampaign = () => {
   const { user } = useAuth();
+  const path = useParams();
+  const { id } = path;
+
   const {
     register,
     formState: { errors, isSubmitting },
     handleSubmit,
     reset,
-  } = useForm();
+    setValue,
+  } = useForm({
+    defaultValues: {
+      title: "",
+      location: "",
+      description: "",
+      amount: "",
+      expired_date: "",
+      category: "",
+    },
+  });
 
   const [alert, setAlert] = useState(null);
   const [file, setFile] = useState(null);
@@ -29,8 +42,26 @@ const CreateCampaign = () => {
     setCategory(response.data);
   };
 
+  const getDataCampaign = async (param) => {
+    const response = await campaignAPI.getDetailCampaign(param);
+    const dataCampaign = response.data;
+    setValue("title", dataCampaign.title);
+    setValue("location", dataCampaign.location);
+    setValue("description", dataCampaign.description);
+    setValue("category", dataCampaign.category_id);
+    setValue("amount", dataCampaign.amount);
+    setValue(
+      "expired_date",
+      new Date(dataCampaign.expired_date).toISOString().split("T")[0]
+    );
+    setImage(dataCampaign.image);
+  };
+
   useEffect(() => {
     categoryData();
+    if (id) {
+      getDataCampaign(id);
+    }
   }, []);
 
   const handleImage = (img) => {
@@ -151,7 +182,7 @@ const CreateCampaign = () => {
                 X
               </button>
               <div
-                className="w-full h-48 rounded-md bg-cover"
+                className="w-full h-96 rounded-md bg-cover"
                 style={{ backgroundImage: `url(${image})` }}
               />
             </div>

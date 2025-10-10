@@ -28,7 +28,15 @@ const campaignAPI = (() => {
       console.log(error);
     }
   };
-
+  const getDetailCampaign = async (id) => {
+    try {
+      const response = await axios.get(`${BASE_URL}/${id}`);
+      console.log(response);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const getCampaignByYayasan = async (id) => {
     try {
       const response = await axios.get(`${BASE_URL}/yayasan/${id}`);
@@ -59,6 +67,7 @@ const campaignAPI = (() => {
   return {
     createCampaign,
     getCampaign,
+    getDetailCampaign,
     getCampaignByYayasan,
     getCampaignByCategory,
     getCampaignBySearch,

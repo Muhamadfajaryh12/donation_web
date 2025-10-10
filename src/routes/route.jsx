@@ -88,6 +88,10 @@ export const router = createBrowserRouter([
         path: "campaign/form",
         element: <CreateCampaign />,
       },
+      {
+        path: "campaign/form/:id",
+        element: <CreateCampaign />,
+      },
     ],
   },
 ]);

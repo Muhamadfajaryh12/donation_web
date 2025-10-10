@@ -6,9 +6,12 @@ import BreadCrumb from "../../components/navigation/BreadCrumb";
 import DataTable from "react-data-table-component";
 import { FaEye, FaPencilAlt, FaTrash } from "react-icons/fa";
 import StatusButton from "../../components/button/StatusButton";
+import { Link } from "react-router-dom";
+import { useModal } from "../../context/ModalProvider";
 
 const YayasanCampaign = () => {
   const [data, setData] = useState([]);
+  const { openModal } = useModal();
   const { user } = useAuth();
   const dataCampaign = async () => {
     const response = await campaignAPI.getCampaignByYayasan(user.id);
@@ -54,10 +57,16 @@ const YayasanCampaign = () => {
                 <button className="p-2 rounded-md bg-gray-300 hover:bg-gray-400 ">
                   <FaEye />
                 </button>
-                <button className="p-2 rounded-md bg-orange-500 hover:bg-orange-600 ">
+                <Link
+                  to={`/yayasan/campaign/form/${row.id}`}
+                  className="p-2 rounded-md bg-orange-500 hover:bg-orange-600 "
+                >
                   <FaPencilAlt className="text-white" />
-                </button>
-                <button className="p-2 rounded-md bg-red-500 hover:bg-red-600">
+                </Link>
+                <button
+                  className="p-2 rounded-md bg-red-500 hover:bg-red-600"
+                  onClick={openModal}
+                >
                   <FaTrash className="text-white" />
                 </button>
               </div>
