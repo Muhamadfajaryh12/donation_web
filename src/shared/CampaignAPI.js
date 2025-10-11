@@ -64,6 +64,20 @@ const campaignAPI = (() => {
       console.log(error);
     }
   };
+
+  const deleteCampaign = async (id) => {
+    try {
+      const response = await axios.delete(`${BASE_URL}/${id}`, {
+        headers: {
+          Authorization: `Bearer ${getToken}`,
+        },
+      });
+      console.log(response);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return {
     createCampaign,
     getCampaign,
@@ -71,6 +85,7 @@ const campaignAPI = (() => {
     getCampaignByYayasan,
     getCampaignByCategory,
     getCampaignBySearch,
+    deleteCampaign,
   };
 })();
 

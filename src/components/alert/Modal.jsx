@@ -1,6 +1,6 @@
 import React from "react";
 
-const Modal = ({ children, isOpen, onClose }) => {
+const Modal = ({ content, isOpen, onClose }) => {
   if (!isOpen) return null;
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 ">
@@ -15,7 +15,7 @@ const Modal = ({ children, isOpen, onClose }) => {
         >
           ✕
         </button>
-        {children}
+        {content}
       </div>
     </div>
   );

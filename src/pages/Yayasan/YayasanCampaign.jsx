@@ -8,15 +8,15 @@ import { FaEye, FaPencilAlt, FaTrash } from "react-icons/fa";
 import StatusButton from "../../components/button/StatusButton";
 import { Link } from "react-router-dom";
 import { useModal } from "../../context/ModalProvider";
+import DeleteModal from "../../components/modal/DeleteModal";
 
 const YayasanCampaign = () => {
   const [data, setData] = useState([]);
-  const { openModal } = useModal();
+  const { openModal, closeModal } = useModal();
   const { user } = useAuth();
   const dataCampaign = async () => {
     const response = await campaignAPI.getCampaignByYayasan(user.id);
     setData(response.data);
-    console.log(response.data);
   };
 
   useEffect(() => {
@@ -24,6 +24,14 @@ const YayasanCampaign = () => {
       dataCampaign();
     }
   }, [user]);
+
+  const handleDeleteCampaign = async (param) => {
+    const response = await campaignAPI.deleteCampaign(param);
+    if (response.status == 200) {
+      setData((prev) => prev.filter((item) => item.id != response.data.id));
+      closeModal();
+    }
+  };
 
   return (
     <div className="">
@@ -65,7 +73,13 @@ const YayasanCampaign = () => {
                 </Link>
                 <button
                   className="p-2 rounded-md bg-red-500 hover:bg-red-600"
-                  onClick={openModal}
+                  onClick={() =>
+                    openModal(
+                      <DeleteModal
+                        onDelete={() => handleDeleteCampaign(row.id)}
+                      />
+                    )
+                  }
                 >
                   <FaTrash className="text-white" />
                 </button>
