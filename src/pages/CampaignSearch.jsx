@@ -17,7 +17,6 @@ const CampaignSearch = ({ mode }) => {
       response = await campaignAPI.getCampaignBySearch(id);
     }
     setData(response.data);
-    console.log(id);
   };
 
   useEffect(() => {

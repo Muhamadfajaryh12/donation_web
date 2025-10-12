@@ -12,8 +12,7 @@ const campaignAPI = (() => {
           Authorization: `Bearer ${getToken}`,
         },
       });
-
-      return response;
+      return response.data;
     } catch (error) {
       console.log(error);
     }
@@ -22,7 +21,6 @@ const campaignAPI = (() => {
   const getCampaign = async () => {
     try {
       const response = await axios.get(BASE_URL);
-      console.log(response);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -31,7 +29,6 @@ const campaignAPI = (() => {
   const getDetailCampaign = async (id) => {
     try {
       const response = await axios.get(`${BASE_URL}/${id}`);
-      console.log(response);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -49,12 +46,12 @@ const campaignAPI = (() => {
   const getCampaignByCategory = async (id) => {
     try {
       const response = await axios.get(`${BASE_URL}?category_id=${id}`);
-      console.log(response);
       return response.data;
     } catch (error) {
       console.log(error);
     }
   };
+
   const getCampaignBySearch = async (keyword) => {
     try {
       const response = await axios.get(`${BASE_URL}?search=${keyword}`);
@@ -65,6 +62,20 @@ const campaignAPI = (() => {
     }
   };
 
+  const updateCampaign = async ({ id, formData }) => {
+    try {
+      const response = await axios.put(`${BASE_URL}/${id}`, formData, {
+        headers: {
+          "Content-type": "multipart/form-data",
+          Authorization: `Bearer ${getToken}`,
+        },
+      });
+
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const deleteCampaign = async (id) => {
     try {
       const response = await axios.delete(`${BASE_URL}/${id}`, {
@@ -72,7 +83,7 @@ const campaignAPI = (() => {
           Authorization: `Bearer ${getToken}`,
         },
       });
-      console.log(response);
+
       return response.data;
     } catch (error) {
       console.log(error);
@@ -85,6 +96,7 @@ const campaignAPI = (() => {
     getCampaignByYayasan,
     getCampaignByCategory,
     getCampaignBySearch,
+    updateCampaign,
     deleteCampaign,
   };
 })();

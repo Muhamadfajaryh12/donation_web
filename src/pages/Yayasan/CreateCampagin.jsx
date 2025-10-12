@@ -15,7 +15,6 @@ const CreateCampaign = () => {
   const { user } = useAuth();
   const path = useParams();
   const { id } = path;
-
   const {
     register,
     formState: { errors, isSubmitting },
@@ -82,12 +81,22 @@ const CreateCampaign = () => {
     formData.append("user_id", user.id);
     formData.append("image", file);
 
-    const response = await campaignAPI.createCampaign(formData);
-    if (response.status == 201) {
-      setAlert(response);
-      reset();
-      setFile(null);
-      setImage(null);
+    if (id) {
+      const response = await campaignAPI.updateCampaign({
+        id: id,
+        formData: formData,
+      });
+      if (response.status == 200) {
+        setAlert(response);
+      }
+    } else {
+      const response = await campaignAPI.createCampaign(formData);
+      if (response.status == 201) {
+        setAlert(response);
+        reset();
+        setFile(null);
+        setImage(null);
+      }
     }
   };
   return (
@@ -101,12 +110,12 @@ const CreateCampaign = () => {
           Silahkan mengisi formulir pembuatan Kampanye dengan benar !
         </p>
       </div>
-      {alert && <MessageAlert data={alert} />}
       <form
         action=""
-        className="w-4xl flex flex-col gap-4"
+        className="w-full flex flex-col gap-4"
         onSubmit={handleSubmit(submit)}
       >
+        {alert && <MessageAlert data={alert} />}
         <TextForm
           type={"text"}
           name="title"
