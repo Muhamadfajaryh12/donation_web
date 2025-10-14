@@ -18,7 +18,7 @@ const Register = () => {
       email: data.email,
       password: data.password,
       name: data.nama_lengkap,
-      role: "yayasan",
+      role: "donatur",
     });
     if (response) {
       setAlert(response);

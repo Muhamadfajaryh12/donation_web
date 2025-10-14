@@ -19,12 +19,16 @@ const Dashboard = () => {
     <div className="w-full">
       <div className="my-4">
         <h1 className="font-bold text-2xl mb-2">Penggalangan Dana Mendesak</h1>
-        <div className="flex gap-4 "></div>
+        <div className="flex gap-4">
+          {data?.urgent?.map((item) => (
+            <CardDonation data={item} />
+          ))}
+        </div>
       </div>
       <div className="my-4">
         <h1 className="font-bold text-2xl mb-2">Penggalangan Dana</h1>
         <div className="flex gap-4">
-          {data.map((item) => (
+          {data?.all?.map((item) => (
             <CardDonation data={item} />
           ))}
         </div>

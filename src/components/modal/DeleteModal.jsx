@@ -5,7 +5,6 @@ import { useModal } from "../../context/ModalProvider";
 
 const DeleteModal = ({ onDelete }) => {
   const { closeModal } = useModal();
-  console.log(closeModal);
   return (
     <div className="p-4">
       <div className="">

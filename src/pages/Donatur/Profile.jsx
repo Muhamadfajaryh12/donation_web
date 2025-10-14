@@ -1,15 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { FaHandHoldingHeart, FaHandHoldingUsd } from "react-icons/fa";
+import { FaCheck, FaHandHoldingHeart, FaHandHoldingUsd } from "react-icons/fa";
 import TextForm from "../../components/form/TextForm";
 import PrimaryButton from "../../components/button/PrimaryButton";
 import DangerButton from "../../components/button/DangerButton";
+import AuthAPI from "../../shared/AuthAPI";
+import { useModal } from "../../context/ModalProvider";
+import VerificationModal from "../../components/modal/VerificationModal";
 
 const Profile = () => {
   const {
     register,
     formState: { errors },
   } = useForm();
+  const [data, setData] = useState(null);
+  const { openModal } = useModal();
+
+  const getProfile = async () => {
+    const response = await AuthAPI.getProfile();
+    setData(response.data);
+  };
+
+  useEffect(() => {
+    getProfile();
+  }, []);
+  const handleVerification = async () => {
+    const response = await AuthAPI.sendVerification();
+    if (response.status == 200) {
+      openModal(<VerificationModal message={response.message} />);
+    }
+  };
+
   return (
     <div className="w-4xl">
       <div className="flex flex-col gap-4 w-full">
@@ -50,13 +71,28 @@ const Profile = () => {
           />
           <div className="flex gap-2 items-center">
             <h1 className="font-semibold text-sm">Status Verifikasi : </h1>
-            <div className="p-2 rounded-md bg-gray-300 text-xs">
-              <span>Belum terverifikasi</span>
-            </div>
+            {data?.is_verified == 1 ? (
+              <div className="p-2 rounded-md bg-green-200 text-xs flex gap-2 items-center">
+                <FaCheck className="text-green-600" />
+                <span className="font-semibold tracking-widest text-green-600">
+                  Verifikasi
+                </span>
+              </div>
+            ) : (
+              <div className="p-2 rounded-md bg-gray-300 text-xs">
+                <span>Belum terverifikasi</span>
+              </div>
+            )}
           </div>
         </form>
         <div className="flex gap-2">
-          <PrimaryButton title={"Lakukan Verifikasi"} />
+          {data?.is_verified == 0 && (
+            <PrimaryButton
+              title={"Lakukan Verifikasi"}
+              onClick={handleVerification}
+              type={"button"}
+            />
+          )}
           <DangerButton title={"Ganti Password"} />
         </div>
       </div>
