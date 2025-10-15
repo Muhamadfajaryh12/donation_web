@@ -14,6 +14,7 @@ import Profile from "../pages/Donatur/Profile";
 import HistoryDonatur from "../pages/Donatur/HistoryDonatur";
 import PrivateLayout from "../layout/PrivateLayout";
 import CampaignSearch from "../pages/CampaignSearch";
+import ProfileYayasan from "../pages/Yayasan/ProfileYayasan";
 
 export const router = createBrowserRouter([
   {
@@ -79,6 +80,10 @@ export const router = createBrowserRouter([
       {
         index: true,
         element: <YayasanDashboard />,
+      },
+      {
+        path: "profile",
+        element: <ProfileYayasan />,
       },
       {
         path: "campaign",

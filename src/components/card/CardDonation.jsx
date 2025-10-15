@@ -1,5 +1,6 @@
 import React from "react";
 import { FaClock, FaTimes, FaTrash } from "react-icons/fa";
+import { FaRegCircleCheck } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
 const CardDonation = ({ data }) => {
@@ -20,6 +21,9 @@ const CardDonation = ({ data }) => {
         <div className="p-3" id="card-body">
           <div className="mb-2 flex gap-2 items-center" id="">
             <p className="text-xs text-gray-500">{data.name}</p>
+            {data?.is_verified && (
+              <FaRegCircleCheck className="text-green-500" size={20} />
+            )}
           </div>
           <h6 className="text-sm font-bold">{data.title}</h6>
           <div className="mt-4">
