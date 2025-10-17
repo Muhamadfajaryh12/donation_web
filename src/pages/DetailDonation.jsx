@@ -1,13 +1,14 @@
 import React from "react";
 import CardGreetingDonation from "../components/card/CardGreetingDonation";
 import PrimaryButton from "../components/button/PrimaryButton";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 import { FaClock, FaTimes } from "react-icons/fa";
 import { FaUserGroup } from "react-icons/fa6";
 
 const DetailDonation = () => {
-  const params = useSearchParams();
+  const params = useParams();
   const { id } = params;
+
   return (
     <div className="flex flex-col gap-4">
       <div className="">
@@ -56,6 +57,7 @@ const DetailDonation = () => {
           <CardGreetingDonation />
         </div>
       </h1>
+      <Link to={`/donation/${id}`}>Berikan donasi</Link>
     </div>
   );
 };

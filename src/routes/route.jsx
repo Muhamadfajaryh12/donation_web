@@ -34,7 +34,11 @@ export const router = createBrowserRouter([
         element: <Dashboard />,
       },
       {
-        path: "/donation",
+        path: "/campaign/:id",
+        element: <DetailDonation />,
+      },
+      {
+        path: "/donation/:id",
         element: (
           <PrivateLayout>
             <Donation />
@@ -59,16 +63,7 @@ export const router = createBrowserRouter([
       },
     ],
   },
-  {
-    path: "/campaign/:id",
-    element: <DetailLayout />,
-    children: [
-      {
-        index: true,
-        element: <DetailDonation />,
-      },
-    ],
-  },
+
   {
     path: "/yayasan",
     element: (
