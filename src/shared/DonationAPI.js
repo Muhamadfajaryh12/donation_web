@@ -21,8 +21,21 @@ const DonationAPI = (() => {
     }
   };
 
+  const getHistoryDonation = async () => {
+    try {
+      const response = await axios.get(`${BASE_URL}/history`, {
+        headers: {
+          Authorization: `Bearer ${getToken}`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return {
     createDonation,
+    getHistoryDonation,
   };
 })();
 export default DonationAPI;

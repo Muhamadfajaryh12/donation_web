@@ -2,8 +2,10 @@ import React from "react";
 import { FaClock, FaTimes, FaTrash } from "react-icons/fa";
 import { FaRegCircleCheck } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import { useToIDR } from "../../hooks/useToIDR";
 
 const CardDonation = ({ data }) => {
+  const toIDR = useToIDR();
   return (
     <Link to={`/campaign/${data.id}`}>
       <div className="rounded-xl shadow-md " id="card-donation">
@@ -31,7 +33,9 @@ const CardDonation = ({ data }) => {
               <h6 className=" text-sm font-semibold text-gray-500">
                 Terkumpul
               </h6>
-              <h6 className="text-blue-600 font-bold">{data.current_amount}</h6>
+              <h6 className="text-blue-600 font-bold">
+                {toIDR(data.current_amount)}
+              </h6>
             </div>
             <div className="w-full bg-gray-200 h-3 rounded-full" id="progress">
               <div
