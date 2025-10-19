@@ -7,18 +7,22 @@ import DangerButton from "../../components/button/DangerButton";
 import AuthAPI from "../../shared/AuthAPI";
 import { useModal } from "../../context/ModalProvider";
 import VerificationModal from "../../components/modal/VerificationModal";
+import { useToIDR } from "../../hooks/useToIDR";
 
 const Profile = () => {
   const {
     register,
+    setValue,
     formState: { errors },
   } = useForm();
   const [data, setData] = useState(null);
   const { openModal } = useModal();
-
+  const toIDR = useToIDR();
   const getProfile = async () => {
     const response = await AuthAPI.getProfile();
     setData(response.data);
+    setValue("name", response?.data?.name);
+    setValue("email", response?.data?.email);
   };
 
   useEffect(() => {
@@ -43,14 +47,18 @@ const Profile = () => {
             <h6 className="font-bold text-sm uppercase mb-2  ">Donasi</h6>
             <div className="flex items-center justify-start my-2 gap-2">
               <FaHandHoldingUsd size={40} />
-              <h1 className="font-bold text-center text-xl">Rp.1.000.000</h1>
+              <h1 className="font-bold text-center text-xl">
+                {toIDR(data?.total_donation)}
+              </h1>
             </div>
           </div>
           <div className="border-2 border-green-500 px-4 py-2 rounded-lg bg-green-200 text-green-600">
             <h6 className="font-bold text-sm uppercase mb-2  ">Campaign</h6>
             <div className="flex items-center justify-start my-2 gap-2">
               <FaHandHoldingHeart size={40} className="" />
-              <h1 className="font-bold text-center text-xl">10</h1>
+              <h1 className="font-bold text-center text-xl">
+                {data?.total_campaign}
+              </h1>
             </div>
           </div>
         </div>
@@ -58,9 +66,10 @@ const Profile = () => {
           <TextForm
             label={"Nama"}
             type={"text"}
-            name={"nama"}
+            name={"name"}
             errors={errors}
             register={(name) => register(name, { required: "" })}
+            disabled
           />
           <TextForm
             label={"Email"}
@@ -68,6 +77,7 @@ const Profile = () => {
             name={"email"}
             errors={errors}
             register={(name) => register(name, { required: "" })}
+            disabled
           />
           <div className="flex gap-2 items-center">
             <h1 className="font-semibold text-sm">Status Verifikasi : </h1>

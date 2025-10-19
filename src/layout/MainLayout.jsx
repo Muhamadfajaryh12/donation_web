@@ -4,9 +4,9 @@ import Navbar from "../components/navigation/Navbar";
 
 const MainLayout = () => {
   return (
-    <div className="w-screen h-screen flex flex-col">
+    <div className="w-screen h-screen ">
       <Navbar />
-      <div className="flex-1 flex justify-center items-center">
+      <div className="max-w-4xl mx-auto my-4 items-center">
         <Outlet />
       </div>
     </div>

@@ -44,6 +44,7 @@ const CreateCampaign = () => {
   const getDataCampaign = async (param) => {
     const response = await campaignAPI.getDetailCampaign(param);
     const dataCampaign = response.data;
+    console.log(dataCampaign);
     setValue("title", dataCampaign.title);
     setValue("location", dataCampaign.location);
     setValue("description", dataCampaign.description);

@@ -20,7 +20,7 @@ const Donation = () => {
 
   const handleDonation = (index, value) => {
     setActive(index);
-    setValue("nominal", value);
+    setValue("donation", value);
   };
 
   const handleAnonym = (checked) => {
@@ -65,17 +65,22 @@ const Donation = () => {
     }
   };
   return (
-    <div className="flex flex-col gap-5">
-      <form onSubmit={handleSubmit(handleSubmitDonation)}>
+    <div className="mt-6">
+      <form
+        onSubmit={handleSubmit(handleSubmitDonation)}
+        className="flex flex-col gap-4 "
+      >
         <div className="">
           <h1 className="font-bold ">Pilih Jumlah Donasi</h1>
           <div className="">
-            <div className="grid grid-cols-3 gap-4 mb-4">
+            <div className="grid grid-cols-3 gap-4 my-4">
               {data.map((item, index) => (
                 <button
                   key={index}
                   className={`p-4 w-full rounded-md shadow-md ${
-                    index == active ? "border-blue-500 border-2" : ""
+                    index == active
+                      ? "border-blue-500 border-2"
+                      : "border-gray-200 border"
                   }`}
                   type="button"
                   onClick={() => handleDonation(index, item)}

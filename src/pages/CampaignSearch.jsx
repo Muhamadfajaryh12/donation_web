@@ -24,7 +24,7 @@ const CampaignSearch = ({ mode }) => {
   }, [mode, paramKey]);
   return (
     <div>
-      <h1></h1>
+      <h1>Hasil pencarian</h1>
       {data.map((item) => (
         <CardDonation data={item} />
       ))}

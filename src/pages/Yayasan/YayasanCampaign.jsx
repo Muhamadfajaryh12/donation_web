@@ -17,6 +17,7 @@ const YayasanCampaign = () => {
   const dataCampaign = async () => {
     const response = await campaignAPI.getCampaignByYayasan(user.id);
     setData(response.data);
+    console.log(response);
   };
 
   useEffect(() => {
@@ -62,17 +63,19 @@ const YayasanCampaign = () => {
             name: "Aksi",
             selector: (row) => (
               <div className="flex gap-2 items-center">
-                <button className="p-2 rounded-md bg-gray-300 hover:bg-gray-400 ">
+                <button className="p-2 rounded-md bg-gray-600 hover:bg-gray-800 flex gap-2 items-center text-white">
                   <FaEye />
+                  <p>Lihat</p>
                 </button>
                 <Link
                   to={`/yayasan/campaign/form/${row.id}`}
-                  className="p-2 rounded-md bg-orange-500 hover:bg-orange-600 "
+                  className="p-2 rounded-md bg-orange-500 hover:bg-orange-600 flex gap-2 items-center text-white"
                 >
-                  <FaPencilAlt className="text-white" />
+                  <FaPencilAlt />
+                  <p>Edit</p>
                 </Link>
                 <button
-                  className="p-2 rounded-md bg-red-500 hover:bg-red-600"
+                  className="p-2 rounded-md bg-red-500 hover:bg-red-600 flex gap-1 items-center text-white"
                   onClick={() =>
                     openModal(
                       <DeleteModal
@@ -81,7 +84,8 @@ const YayasanCampaign = () => {
                     )
                   }
                 >
-                  <FaTrash className="text-white" />
+                  <FaTrash />
+                  <p>Hapus</p>
                 </button>
               </div>
             ),
