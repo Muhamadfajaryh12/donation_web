@@ -5,7 +5,6 @@ import CardDonation from "../components/card/CardDonation";
 
 const CampaignSearch = ({ mode }) => {
   const [params] = useSearchParams();
-  console.log(mode);
   const paramKey = params.get("q") || params.get("id");
 
   const [data, setData] = useState([]);
