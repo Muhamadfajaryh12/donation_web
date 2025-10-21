@@ -1,36 +1,32 @@
 import React, { useEffect, useState } from "react";
 import CardDonation from "../components/card/CardDonation";
 import campaignAPI from "../shared/CampaignAPI";
+import useFetch from "../hooks/useFetch";
+import CardSkeleton from "../components/card/CardSkeleton";
 
 const Dashboard = () => {
-  const [data, setData] = useState([]);
-
-  const dataCampaign = async () => {
-    const response = await campaignAPI.getCampaign();
-
-    setData(response.data);
-  };
-
-  useEffect(() => {
-    dataCampaign();
-  }, []);
+  const state = useFetch({ url: "/campaign" });
 
   return (
     <div className="w-full">
       <div className="my-4">
         <h1 className="font-bold text-2xl mb-2">Penggalangan Dana Mendesak</h1>
         <div className="flex gap-4">
-          {data?.urgent?.map((item) => (
-            <CardDonation data={item} />
-          ))}
+          {state.loading
+            ? Array.from({ length: 3 }, (_, index) => (
+                <CardSkeleton key={index} />
+              ))
+            : state?.data?.urgent?.map((item) => <CardDonation data={item} />)}
         </div>
       </div>
       <div className="my-4">
         <h1 className="font-bold text-2xl mb-2">Penggalangan Dana</h1>
         <div className="flex gap-4">
-          {data?.all?.map((item) => (
-            <CardDonation data={item} />
-          ))}
+          {state.loading
+            ? Array.from({ length: 3 }, (_, index) => (
+                <CardSkeleton key={index} />
+              ))
+            : state?.data?.all?.map((item) => <CardDonation data={item} />)}
         </div>
       </div>
     </div>
