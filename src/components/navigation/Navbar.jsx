@@ -33,7 +33,7 @@ const Navbar = () => {
   ];
   return (
     <div className="flex w-full p-2 border-b border-gray-300 justify-between items-center">
-      <h1>Donation</h1>
+      <Link to={"/"}>Donation</Link>
       <Dropdown title={"Kategori"} data={dataDropdownCategory} />
       <SearchBar />
       {token ? (

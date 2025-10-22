@@ -25,10 +25,8 @@ const HistoryDonatur = () => {
   const filterData = data?.slice(firstIndex, lastIndex);
   const totalPages = Math.ceil(data?.length / limitItem);
   return (
-    <div className="w-xl">
-      <h1 className="font-extrabold text-2xl text-blue-800 mb-4">
-        Riwayat Donasi
-      </h1>
+    <>
+      <h1 className="font-bold mb-4">Riwayat Donasi</h1>
       {filterData.length > 0 ? (
         <>
           {filterData.map((item) => (
@@ -52,7 +50,7 @@ const HistoryDonatur = () => {
       ) : (
         <EmptyDonation />
       )}
-    </div>
+    </>
   );
 };
 

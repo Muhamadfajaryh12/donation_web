@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Dropdown = ({ title, data }) => {
   const [open, setOpen] = useState([]);
   return (
-    <div className="relative">
+    <div className="relative z-10">
       <button onClick={() => setOpen(!open)}>{title}</button>
       <div
         className={`${
@@ -13,7 +13,12 @@ const Dropdown = ({ title, data }) => {
       >
         <ul>
           {data.map((item) => (
-            <li className="my-2 hover:bg-gray-100 p-2">{item.link}</li>
+            <li
+              className="my-2 hover:bg-gray-100 p-2"
+              onClick={() => setOpen(!open)}
+            >
+              {item.link}
+            </li>
           ))}
         </ul>
       </div>

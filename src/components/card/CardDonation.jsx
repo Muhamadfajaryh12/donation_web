@@ -7,7 +7,7 @@ import { useToIDR } from "../../hooks/useToIDR";
 const CardDonation = ({ data }) => {
   const toIDR = useToIDR();
   return (
-    <Link to={`/campaign/${data.id}`} className="w-96">
+    <Link to={`/campaign/${data.id}`} className="w-full max-w-96">
       <div className="rounded-xl shadow-md " id="card-donation">
         <div className="relative" id="card-header">
           <img src={data.image} alt="" className="rounded-t-lg w-full h-48" />

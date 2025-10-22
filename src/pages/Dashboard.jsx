@@ -10,7 +10,7 @@ const Dashboard = () => {
   return (
     <div className="w-full">
       <div className="my-4">
-        <h1 className="font-bold text-2xl mb-2">Penggalangan Dana Mendesak</h1>
+        <h1 className="font-bold  mb-4">Penggalangan Dana Mendesak</h1>
         <div className="flex gap-4">
           {state.loading
             ? Array.from({ length: 3 }, (_, index) => (
@@ -20,7 +20,7 @@ const Dashboard = () => {
         </div>
       </div>
       <div className="my-4">
-        <h1 className="font-bold text-2xl mb-2">Penggalangan Dana</h1>
+        <h1 className="font-bold  mb-4">Penggalangan Dana</h1>
         <div className="flex gap-4">
           {state.loading
             ? Array.from({ length: 3 }, (_, index) => (

@@ -26,7 +26,7 @@ const Register = () => {
     console.log(response);
   };
   return (
-    <div>
+    <div className="mt-24">
       <h1 className=" text-center font-extrabold text-blue-600 text-4xl">
         Daftar Akun
       </h1>
@@ -35,7 +35,7 @@ const Register = () => {
       </p>
       <form
         onSubmit={handleSubmit(submit)}
-        className="w-lg flex flex-col gap-2"
+        className="w-lg flex flex-col gap-2 mx-auto"
       >
         {alert && <MessageAlert data={alert} />}
         <TextForm

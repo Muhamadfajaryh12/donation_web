@@ -36,7 +36,7 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className="mt-24">
       <h1 className=" text-center font-extrabold text-blue-600 text-4xl">
         Masuk
       </h1>
@@ -44,7 +44,7 @@ const Login = () => {
         Masuk Kedalam Akun Anda
       </p>
       <form
-        className="flex flex-col gap-4 w-lg"
+        className="flex flex-col gap-4 w-lg  mx-auto"
         onSubmit={handleSubmit(submit)}
       >
         {alert && <MessageAlert data={alert} />}
