@@ -7,10 +7,10 @@ import { useToIDR } from "../../hooks/useToIDR";
 const CardDonation = ({ data }) => {
   const toIDR = useToIDR();
   return (
-    <Link to={`/campaign/${data.id}`} className="w-full max-w-96">
-      <div className="rounded-xl shadow-md " id="card-donation">
+    <Link to={`/campaign/${data.id}`} className="w-full max-w-96 ">
+      <div className="rounded-xl shadow-md  bg-white" id="card-donation">
         <div className="relative" id="card-header">
-          <img src={data.image} alt="" className="rounded-t-lg w-full h-48" />
+          <img src={data.image} alt="" className="rounded-t-lg w-full h-32" />
           <div className="absolute bottom-0 flex  justify-between w-full">
             <div className="text-xs bg-white p-1 rounded-full m-2 w-14 text-center ">
               <p className="text-blue-600 font-semibold">{data.status}</p>
@@ -28,12 +28,12 @@ const CardDonation = ({ data }) => {
             )}
           </div>
           <h6 className="text-sm font-bold">{data.title}</h6>
-          <div className="mt-4">
+          <div className="mt-2">
             <div className="flex gap-1  mb-1 items-center">
               <h6 className=" text-sm font-semibold text-gray-500">
                 Terkumpul
               </h6>
-              <h6 className="text-blue-600 font-bold">
+              <h6 className="text-blue-600 font-bold text-sm">
                 {toIDR(data.current_amount)}
               </h6>
             </div>

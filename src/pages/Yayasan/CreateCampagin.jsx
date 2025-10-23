@@ -104,9 +104,7 @@ const CreateCampaign = () => {
     <div>
       <BreadCrumb data={["Yayasan", "Campaign", "Formulir"]} />
       <div className="mb-4">
-        <h1 className="font-extrabold text-2xl text-blue-800 ">
-          Formulir Pembuatan Kampanye
-        </h1>
+        <h1 className="font-extrabold text-2xl  ">Formulir Kampanye</h1>
         <p className="text-sm text-gray-500 font-semibold">
           Silahkan mengisi formulir pembuatan Kampanye dengan benar !
         </p>
