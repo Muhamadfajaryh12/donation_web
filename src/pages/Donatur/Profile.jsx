@@ -8,6 +8,7 @@ import AuthAPI from "../../shared/AuthAPI";
 import { useModal } from "../../context/ModalProvider";
 import VerificationModal from "../../components/modal/VerificationModal";
 import { useToIDR } from "../../hooks/useToIDR";
+import ChangePasswordModal from "../../components/modal/ChangePasswordModal";
 
 const Profile = () => {
   const {
@@ -28,6 +29,7 @@ const Profile = () => {
   useEffect(() => {
     getProfile();
   }, []);
+
   const handleVerification = async () => {
     const response = await AuthAPI.sendVerification();
     if (response.status == 200) {
@@ -103,7 +105,10 @@ const Profile = () => {
               type={"button"}
             />
           )}
-          <DangerButton title={"Ganti Password"} />
+          <DangerButton
+            title={"Ganti Password"}
+            onClick={() => openModal(<ChangePasswordModal />)}
+          />
         </div>
       </div>
     </div>

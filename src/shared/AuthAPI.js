@@ -62,11 +62,33 @@ const AuthAPI = (() => {
       console.log(error);
     }
   };
+
+  const updatePassword = async ({ old_password, new_password }) => {
+    try {
+      const response = await axios.post(
+        `${BASE_URL}/update-password`,
+        {
+          old_password,
+          new_password,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${getToken}`,
+          },
+        }
+      );
+      console.log(response);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return {
     register,
     login,
     sendVerification,
     getProfile,
+    updatePassword,
   };
 })();
 
