@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useModal } from "../../context/ModalProvider";
 import { useForm } from "react-hook-form";
 import TextForm from "../form/TextForm";
 import PrimaryButton from "../button/PrimaryButton";
@@ -7,7 +6,6 @@ import AuthAPI from "../../shared/AuthAPI";
 import MessageAlert from "../alert/MessageAlert";
 
 const ChangePasswordModal = () => {
-  const { closeModal } = useModal();
   const [message, setMessage] = useState(null);
   const {
     register,
@@ -57,5 +55,3 @@ const ChangePasswordModal = () => {
 };
 
 export default ChangePasswordModal;
-{
-}

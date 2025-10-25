@@ -4,6 +4,7 @@ import {
   FaArrowLeft,
   FaArrowRight,
   FaBars,
+  FaBuilding,
   FaDashcube,
   FaPlus,
 } from "react-icons/fa";
@@ -27,6 +28,11 @@ const dataLink = [
     link: "/yayasan/campaign/form",
     title: "Buat Kampanye",
     icon: <FaPlus />,
+  },
+  {
+    link: "/yayasan/profile",
+    title: "Profile",
+    icon: <FaBuilding />,
   },
 ];
 

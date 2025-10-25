@@ -9,8 +9,9 @@ import { useModal } from "../../context/ModalProvider";
 import VerificationModal from "../../components/modal/VerificationModal";
 import { useToIDR } from "../../hooks/useToIDR";
 import ChangePasswordModal from "../../components/modal/ChangePasswordModal";
+import BreadCrumb from "../../components/navigation/BreadCrumb";
 
-const Profile = () => {
+const Profile = ({ mode }) => {
   const {
     register,
     setValue,
@@ -40,30 +41,39 @@ const Profile = () => {
   return (
     <div className="w-4xl">
       <div className="flex flex-col gap-4 w-full">
-        <h1 className="font-extrabold text-2xl text-blue-800 ">
-          Profile Donatur
-        </h1>
-        <h5 className="font-bold">Kontribusi Anda</h5>
-        <div className="grid grid-cols-2 gap-2 w-full">
-          <div className="border-2 border-orange-500 px-4 py-2 rounded-lg bg-orange-200 text-orange-600">
-            <h6 className="font-bold text-sm uppercase mb-2  ">Donasi</h6>
-            <div className="flex items-center justify-start my-2 gap-2">
-              <FaHandHoldingUsd size={40} />
-              <h1 className="font-bold text-center text-xl">
-                {toIDR(data?.total_donation)}
-              </h1>
+        {mode == "donatur" ? (
+          <>
+            <h1 className="font-extrabold text-2xl text-blue-800 ">
+              Profile Donatur
+            </h1>
+            <h5 className="font-bold">Kontribusi Anda</h5>
+            <div className="grid grid-cols-2 gap-2 w-full">
+              <div className="border-2 border-orange-500 px-4 py-2 rounded-lg bg-orange-200 text-orange-600">
+                <h6 className="font-bold text-sm uppercase mb-2  ">Donasi</h6>
+                <div className="flex items-center justify-start my-2 gap-2">
+                  <FaHandHoldingUsd size={40} />
+                  <h1 className="font-bold text-center text-xl">
+                    {toIDR(data?.total_donation)}
+                  </h1>
+                </div>
+              </div>
+              <div className="border-2 border-green-500 px-4 py-2 rounded-lg bg-green-200 text-green-600">
+                <h6 className="font-bold text-sm uppercase mb-2  ">Campaign</h6>
+                <div className="flex items-center justify-start my-2 gap-2">
+                  <FaHandHoldingHeart size={40} className="" />
+                  <h1 className="font-bold text-center text-xl">
+                    {data?.total_campaign}
+                  </h1>
+                </div>
+              </div>
             </div>
-          </div>
-          <div className="border-2 border-green-500 px-4 py-2 rounded-lg bg-green-200 text-green-600">
-            <h6 className="font-bold text-sm uppercase mb-2  ">Campaign</h6>
-            <div className="flex items-center justify-start my-2 gap-2">
-              <FaHandHoldingHeart size={40} className="" />
-              <h1 className="font-bold text-center text-xl">
-                {data?.total_campaign}
-              </h1>
-            </div>
-          </div>
-        </div>
+          </>
+        ) : (
+          <>
+            <BreadCrumb data={["Yayasan", "Profile"]} />
+            <h1 className="font-semibold text-2xl">Profil Yayasan</h1>
+          </>
+        )}
         <form className="flex flex-col gap-4">
           <TextForm
             label={"Nama"}

@@ -47,7 +47,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/profile",
-        element: <Profile />,
+        element: <Profile mode={"donatur"} />,
       },
       {
         path: "/history",
@@ -78,7 +78,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "profile",
-        element: <ProfileYayasan />,
+        element: <Profile mode={"yayasan"} />,
       },
       {
         path: "campaign",

@@ -5,6 +5,7 @@ import PrimaryButton from "../components/button/PrimaryButton";
 import { Link } from "react-router-dom";
 import AuthAPI from "../shared/AuthAPI";
 import MessageAlert from "../components/alert/MessageAlert";
+import SelectForm from "../components/form/SelectForm";
 
 const Register = () => {
   const [alert, setAlert] = useState(null);
@@ -12,18 +13,19 @@ const Register = () => {
     register,
     formState: { errors, isSubmitting },
     handleSubmit,
+    reset,
   } = useForm();
   const submit = async (data) => {
     const response = await AuthAPI.register({
       email: data.email,
       password: data.password,
       name: data.nama_lengkap,
-      role: "donatur",
+      role: data.role,
     });
     if (response) {
       setAlert(response);
+      reset();
     }
-    console.log(response);
   };
   return (
     <div className="mt-24">
@@ -35,7 +37,7 @@ const Register = () => {
       </p>
       <form
         onSubmit={handleSubmit(submit)}
-        className="w-lg flex flex-col gap-2 mx-auto"
+        className="w-lg flex flex-col gap-4 mx-auto"
       >
         {alert && <MessageAlert data={alert} />}
         <TextForm
@@ -60,6 +62,23 @@ const Register = () => {
           name={"password"}
           register={(name) =>
             register(name, { required: "Password wajib diisi" })
+          }
+          errors={errors}
+        />{" "}
+        <SelectForm
+          name={"role"}
+          data={[
+            {
+              name: "donatur",
+            },
+            { name: "yayasan" },
+          ]}
+          valueField={"name"}
+          labelField={"name"}
+          label={"Mendaftar sebagai"}
+          placeholder={"Pilih "}
+          register={(name) =>
+            register(name, { required: "Pengguna wajib diisi" })
           }
           errors={errors}
         />

@@ -12,7 +12,7 @@ const AuthAPI = (() => {
         role,
         name,
       });
-      return response;
+      return response.data;
     } catch (error) {
       return error.response.data;
     }
